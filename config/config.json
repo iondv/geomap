@@ -1,0 +1,34 @@
+{
+  "parametrised": true,
+  "sysTitle": "[[sys.title]]",
+  "di": {
+    "geoMeta": {
+      "module": "./lib/impl/DsGeoMetaRepository",
+      "initMethod": "init",
+      "initLevel": 1,
+      "options": {
+        "dataSource": "ion://Db"
+      }
+    },
+    "geoData": {
+      "module": "./lib/impl/GeoDataRepository",
+      "initMethod": "init",
+      "options": {
+        "dataRepo": "ion://cachedDataRepo",
+        "metaRepo": "ion://metaRepo",
+        "dataSource": "ion://Db"
+      }
+    },
+    "securedGeoData": {
+      "module": "./lib/impl/SecuredGeoDataRepository",
+      "options": {
+        "data": "ion://geoData",
+        "acl": "ion://aclProvider"
+      }
+    },
+    "regions": {
+      "source": {
+      }
+    }
+  }
+}
