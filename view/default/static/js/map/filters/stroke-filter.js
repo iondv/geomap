@@ -15,9 +15,9 @@
     getDefaultParams: function () {
       return {
         button: {
-          caption: 'Stroke',
-          hint: 'Stroke district',
-          resetHint: 'Reset stroke',
+          caption: 'Обводка',
+          hint: 'Обвести регион',
+          resetHint: 'Сбросить обводку',
           maxWidth: 100
         },
         path: {

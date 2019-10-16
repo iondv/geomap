@@ -16,7 +16,7 @@ module.exports = function (req, res) {
     }, data), (err, result)=> {
       if (err) {
         scope.sysLog.error(err);
-        return res.status(500).send('Template render error');
+        return res.status(500).send('Ошибка рендера шаблона');
       }
       return result ? res.send(result) : res.sendStatus(404);
     });
@@ -39,11 +39,11 @@ module.exports = function (req, res) {
           //renderTemplate({items, req});
             res.json(items.length);
         } else {
-          res.status(404).send('Objects not founds');
+          res.status(404).send('Объектs не найденs');
         }
       }).catch(err => {
         scope.sysLog.error(err);
-        res.status(500).send('Error retrieving objects');
+        res.status(500).send('Ошибка получения объектов');
       });
     } else {
       renderTemplate({req});

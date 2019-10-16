@@ -18,9 +18,9 @@
     getDefaultParams: function () {
       return {
         button: {
-          caption: 'Filter',
-          hint: 'Select filter',
-          resetHint: 'Reset filter',
+          caption: 'Фильтр',
+          hint: 'Выбрать фильтр',
+          resetHint: 'Сбросить фильтр',
           maxWidth: 100
         }
       };

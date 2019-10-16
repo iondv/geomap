@@ -37,7 +37,7 @@ module.exports = function (req, res) {
         res.render('view/index', {
           baseUrl: req.app.locals.baseUrl,
           module: moduleName,
-          title: 'Geo module',
+          title: 'Гео-модуль',
           pageCode: 'index',
           map: {
             start: scope.settings.get(moduleName + '.start'),
@@ -63,7 +63,7 @@ module.exports = function (req, res) {
         res.sendStatus(500);
       });
   } else {
-    scope.sysLog.error(new Error('Geo-module metadata repository is not specified.'));
+    scope.sysLog.error(new Error('Не указан репозиторий метаданных гео-модуля.'));
     res.sendStatus(500);
   }
 };

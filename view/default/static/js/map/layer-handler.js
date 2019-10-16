@@ -74,7 +74,7 @@
       }.bind(this)).always(function () {
         xhr = null;
       }.bind(this)).fail(function (xhr) {
-        $content.addClass('loaded has-error').html(xhr.responseText || 'Error');
+        $content.addClass('loaded has-error').html(xhr.responseText || 'Ошибка');
         this.events.fire('change');
       }.bind(this)).fail(processAjaxError);
     }
