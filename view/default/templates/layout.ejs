@@ -75,6 +75,6 @@
 <script src="<%=module%>/vendor/paper/paper-core.min.js"></script>
 <script src="<%=module%>/js/common.js"></script>
 <%- scripts %>
-<%- pageEndContent %>
+<%- typeof pageEndContent !== 'undefined' ? pageEndContent : "" %>
 </body>
 </html>

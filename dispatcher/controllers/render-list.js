@@ -39,7 +39,7 @@ module.exports = function (req, res) {
           //renderTemplate({items, req});
             res.json(items.length);
         } else {
-          res.status(404).send('Objects not founds');
+          res.status(404).send('Objects not found');
         }
       }).catch(err => {
         scope.sysLog.error(err);

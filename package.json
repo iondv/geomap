@@ -1,6 +1,6 @@
 {
   "name": "geomap",
-  "version": "2.0.0",
+  "version": "2.0.3",
   "homepage": "https://github.com/iondv/geomap",
   "bugs": {
     "url": "https://github.com/iondv/geomap/issues"
@@ -8,7 +8,7 @@
   "license": "Apache License 2.0",
   "engines": {
     "node": ">=0.12.0",
-    "ion": "3.0.0"
+    "ion": "3.0.10"
   },
   "repository": {
     "type": "git",
