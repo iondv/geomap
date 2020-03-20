@@ -20,10 +20,15 @@
   <script src="<%= module %>/vendor/store/store.min.js"></script>
   <!--<script src="<%= module %>/vendor/regions/regions.js"></script>-->
   <script src="<%= module %>/js/preload.js"></script>
+  <script src="i18n/handler.js"></script>
 </head>
 
 <body data-page="<%=pageCode %>" class="<%- hidePageHead ? 'no-head' : ''%> <%- hidePageSidebar ? 'no-aside' : ''%>">
-
+<script>
+  window.__ = function(id, params) {
+    return window.s('<%= module %>', id, params);
+  }
+</script>
 <div id="wrapper" class="clearfix">
     <% if (!hidePageSidebar) { %>
     <% include layout/sidebar %>

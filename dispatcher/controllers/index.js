@@ -3,9 +3,11 @@
  */
 'use strict';
 
-var buildMenu = require('../../backend/menu').buildMenu;
-var moduleName = require('../../module-name');
-var di = require('core/di');
+const buildMenu = require('../../backend/menu').buildMenu;
+const moduleName = require('../../module-name');
+const Errors = require('../errors/web-errors');
+const IonError = require('core/IonError');
+const di = require('core/di');
 
 function defaultNode(nav) {
   var result = '';
@@ -63,7 +65,7 @@ module.exports = function (req, res) {
         res.sendStatus(500);
       });
   } else {
-    scope.sysLog.error(new Error('Не указан репозиторий метаданных гео-модуля.'));
+    scope.sysLog.error(new IonError(Errors.NO_REPO));
     res.sendStatus(500);
   }
 };

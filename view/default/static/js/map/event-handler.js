@@ -48,7 +48,7 @@
       if (this.handler) {
         this.event.on(this.eventName, this.handler, this.params);
       } else {
-        console.error('EventHandler: not found handler:', this.params);
+        console.error(__('js.handlerNotFound'), this.params);
       }
     }
   };

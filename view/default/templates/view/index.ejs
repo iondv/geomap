@@ -45,11 +45,11 @@
 
   <div class="map-footer">
     <div class="map-legend" style="display: none">
-      <div class="map-legend-toggle" title="Показать/скрыть легенду">
+      <div class="map-legend-toggle" title="<%=__('views.showLegend')%>">
         <span class="glyphicon glyphicon-option-vertical"></span>
       </div>
       <div class="map-legend-content">
-        <div class="map-legend-title">Условные обозначения</div>
+        <div class="map-legend-title"><%=__('views.legend')%></div>
         <div class="map-legend-list"></div>
       </div>
     </div>
@@ -57,8 +57,8 @@
 
   <div class="map-search-filter empty">
     <div class="map-search-filter-controls">
-      <input type="text" class="map-search-filter-value" placeholder="Найти...">
-      <button type="button" title="Искать" class="map-search-filter-execute map-button">
+      <input type="text" class="map-search-filter-value" placeholder="<%=__('views.find')%>">
+      <button type="button" title="<%=__('views.search')%>" class="map-search-filter-execute map-button">
         <span class="map-button-icon" style="background-image: url('/geomap/img/search.png');"></span>
       </button>
       <button type="button" title="Сбросить поиск" class="map-search-filter-reset map-button">
@@ -68,7 +68,7 @@
     <div class="map-search-filter-result">
       <div class="loader"><i class="fa fa-refresh fa-spin"></i></div>
       <div class="map-search-filter-not-found">
-        <i>Ничего не найдено...</i>
+        <i><%=__('views.noResults')%></i>
       </div>
       <div class="map-search-filter-list"></div>
     </div>
@@ -77,7 +77,7 @@
   <div class="map-loader">
     <div class="map-loader-content">
       <span class="fa fa-refresh fa-spin"></span>
-      <span class="map-loader-title">Загрузка данных...</span>
+      <span class="map-loader-title"><%=__('views.loadingData')%></span>
     </div>
   </div>
 
@@ -104,12 +104,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Фильтр</h4>
+        <h4 class="modal-title"><%=__('views.filter')%></h4>
       </div>
       <div class="modal-body">
       </div>
       <div class="modal-footer">
-        <button class="apply btn btn-primary">Применить</button>
+        <button class="apply btn btn-primary"><%=__('views.apply')%></button>
       </div>
     </div>
   </div>

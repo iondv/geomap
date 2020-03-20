@@ -56,7 +56,7 @@
                 this.createHandlerCenterMapByImodalObject(this.params.handlers[key]);
                 break;
               default:
-                console.error('Not found viewer handler', key);
+                console.error(__('js.vHandlerNotFound'), key);
             }
           }
         }

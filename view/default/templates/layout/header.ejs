@@ -14,7 +14,7 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
           <%let avatar = user.properties().avatar;%>
           <%if (avatar) {%>
-          <img class="user-avatar" src="<%=avatar.link%>" height="34" alt="User avatar"/>
+          <img class="user-avatar" src="<%=avatar.link%>" height="34" alt="<%=__('views.avatar')%>"/>
           <%}%>
           <span class="user-name">
             <span class="hidden-xs"><%=typeof user !== 'undefined' ? (user.name() || user.id()) : '-'%>
@@ -23,7 +23,7 @@
         </a>
         <ul class="dropdown-menu hold-on-click">
           <li>
-            <a href="<%=module%>/sign-out"><i class="fa fa-power-off"></i> Выйти</a>
+            <a href="<%=module%>/sign-out"><i class="fa fa-power-off"></i> <%=__('views.exit')%></a>
           </li>
         </ul>
       </li>
