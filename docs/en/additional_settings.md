@@ -4,14 +4,13 @@
 
 A typical setting of the _geomap_ module in the application configuration file includes the following sections:
 
-- [x] [Regional outlines](/docs/ru/additional_settings.md#regional-outlines)
 - [x] [Setting the area to place standard Yandex elements and a loader `"ymapControls"`](/docs/en/additional_settings.md#setting-the-area-to-place-standard-yandex-elements-and-a-loader)
 - [x] [Setting up floating toolbar `"panels"`](/docs/enadditional_settings.md#setting-up-floating-toolbars)
 - [x] [Panel settings for filters `"panels"`](/docs/en/additional_settings.md#tollbar-settings-for-filters)
 - [x] [Setting customization tool for selecting an arbitrary area on the map `"stroke"`](/docs/en/additional_settings.md#setting-customization-tool-for-selecting-an-arbitrary-area-on-the-map)
 - [x] [Display object by template `"templates"`](/docs/en/additional_settings.md#display-object-by-template)
 - [x] [Integration of external icon `"statics"`](/docs/en/additional_settings.md#integration-of-external-icon)
-- [x] [Setting for Region states by default `"regions"`](/docs/en/additional_settings.md#setting-for-region-states-by-default)
+- [x] [Regional outlines `"regions"`](/docs/en/additional_settings.md#regional-outlines)
 - [x] [Setting to free up space on the map while searching `"search"`](/docs/en/additional_settings.md#setting-to-free-up-space-on-the-map-while-searching)
 - [x] [Setting the location of filter menu items `"search"`](/docs/en/additional_settings.md#setting-the-location-of-filter-menu-items)
 - [x] [Setting highlighting search results on a map `"search"`](/docs/en/additional_settings.md#setting-highlighting-search-results-on-a-map)
@@ -46,21 +45,6 @@ The structure of the sections is as follows:
 
 _In details for each section:_
 
-## Regional outlines
-
-Place region outlines to the data/regions folder in geoJSON format.
-
-The easiest way is to use https://github.com/esosedi/regions, and you can determine the region code either through https://www.openstreetmap.org/ or http://data.esosedi.org. The last one immediately gives an example script for the esosedi/regions utility.
-
-How to get the Russian outline example:
-
-```bash
-# Install the library osme
-npm install osme
-# Execute queries
-node -e "osme=require('osme'); osme.geoJSON('60189', {lang: 'en', quality: 0}, data => { console.log(JSON.stringify(data));})" > 60189.json
-```
-Copy the received file 60189.json in data/regions.
 
 ## Setting the area to place standard Yandex elements and a loader 
 
@@ -257,13 +241,12 @@ In the _statics_ array set the objects:
 
 The second step is to specify icons for geolayers. [Read more]()
 
-## Setting for Region states by default:
+## Regional outlines:
 
 ```javascript
 "regions": 
   {
     "enabled" : true,
-    "activeOsmId" : "1651685",
     "osmIds" : [ 
       "151223"
     ]
