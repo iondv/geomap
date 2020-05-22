@@ -19,9 +19,9 @@
         osmIds: [],
         activeOsmId: null,
         button: {
-          caption: __('js.areas'),
-          hint: __('js.filterAreas'),
-          resetHint: __('js.cancelAreas'),
+          caption: __('Районы'),
+          hint: __('Фильтр по районам'),
+          resetHint: __('Сбросить фильтр'),
           maxWidth: 100
         },
         levels: {

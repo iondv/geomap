@@ -18,9 +18,9 @@
     getDefaultParams: function () {
       return {
         button: {
-          caption: __('js.filter'),
-          hint: __('js.chooseFilter'),
-          resetHint: __('js.cancelFilter'),
+          caption: __('Фильтр'),
+          hint: __('Выбрать фильтр'),
+          resetHint: __('Сбросить фильтр'),
           maxWidth: 100
         }
       };

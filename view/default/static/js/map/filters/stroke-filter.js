@@ -15,9 +15,9 @@
     getDefaultParams: function () {
       return {
         button: {
-          caption: __('js.stroke'),
-          hint: __('js.markRegion'),
-          resetHint: __('js.cancelStroke'),
+          caption: __('Обводка'),
+          hint: __('Обвести регион'),
+          resetHint: __('Сбросить обводку'),
           maxWidth: 100
         },
         path: {
@@ -204,7 +204,7 @@
         this.polygon = new ymaps.Polygon([points], {}, $.extend({}, this.params.polygon, {
           interactivityModel: 'default#transparent'
         }));
-        console.log(__('js.numPoints'), points.length);
+        console.log(__('StrokeFilter: Num points:'), points.length);
       }
     }
   });
