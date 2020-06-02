@@ -5,7 +5,7 @@
 
 const buildMenu = require('../../backend/menu').buildMenu;
 const moduleName = require('../../module-name');
-const Errors = require('../errors/web-errors');
+const Errors = require('../../errors/web-errors');
 const IonError = require('core/IonError');
 const di = require('core/di');
 

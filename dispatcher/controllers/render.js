@@ -5,7 +5,7 @@ const moduleName = require('../../module-name');
 const di = require('core/di');
 const moment = require('moment');
 const __ = require('core/strings').unprefix('errors');
-const Errors = require('../errors/web-errors');
+const Errors = require('../../errors/web-errors');
 
 /* jshint maxstatements: 50, maxcomplexity: 30 */
 module.exports = function (req, res) {
