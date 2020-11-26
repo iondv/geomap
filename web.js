@@ -12,6 +12,8 @@ const theme = require('lib/util/theme');
 const router = express.Router();
 const ejsLocals = require('ejs-locals');
 
+const {load} = require('core/i18n');
+const errorSetup = require('core/error-setup');
 const di = require('core/di');
 const config = require('./config');
 const rootConfig = require('../../config');
@@ -19,13 +21,13 @@ const moduleName = require('./module-name');
 const dispatcher = require('./dispatcher');
 const extendDi = require('core/extendModuleDi');
 const alias = require('core/scope-alias');
-const errorSetup = require('core/error-setup');
-const i18nSetup = require('core/i18n-setup');
 const sysMenuCheck = require('lib/util/sysMenuCheck');
 const strings = require('core/strings');
 const isProduction = process.env.NODE_ENV === 'production';
 
 const lastVisit = require('lib/last-visit');
+
+errorSetup(path.join(__dirname, 'strings'));
 
 router.get('/api/filter', dispatcher.api.filter);
 router.get('/api/regions', dispatcher.api.regions);
@@ -61,15 +63,19 @@ app.set('views', []);
 app.set('view engine', 'ejs');
 
 app._init = function () {
-  return di(
-      moduleName,
-      extendDi(moduleName, config.di),
-      {
-        module: app
-      },
-      'app',
-      [],
-      'modules/' + moduleName)
+  return load(path.join(__dirname, 'i18n'))
+    .then(
+      () => di(
+        moduleName,
+        extendDi(moduleName, config.di),
+        {
+          module: app
+        },
+        'app',
+        [],
+        'modules/' + moduleName
+      )
+    )
     .then(scope => alias(scope, scope.settings.get(moduleName + '.di-alias')))
     .then((scope) => {
       try {
@@ -77,12 +83,10 @@ app._init = function () {
         // i18n
         const lang = config.lang || rootConfig.lang || 'ru';
         const i18nDir = path.join(__dirname, 'i18n');
-        scope.translate.setup(lang, config.i18n || i18nDir, moduleName);
 
         let themePath = scope.settings.get(moduleName + '.theme') || config.theme || 'default';
         themePath = theme.resolve(__dirname, themePath);
         const themeI18n = path.join(themePath, 'i18n');
-        scope.translate.setup(lang, themeI18n, moduleName);
         //
         theme(
           app,
