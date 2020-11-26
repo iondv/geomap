@@ -227,7 +227,7 @@
           title.push(this.navs[id].params.title || '-');
         }
       }
-      $('#page-header').find('h1').html(title.length ? title.join(', ') : 'Гео-карта');
+      $('#page-header').find('h1').html(title.length ? title.join(', ') : __('js.map'));
     },
 
     // MODAL LINK

@@ -12,16 +12,22 @@ const theme = require('lib/util/theme');
 const router = express.Router();
 const ejsLocals = require('ejs-locals');
 
+const {load} = require('core/i18n');
+const errorSetup = require('core/error-setup');
 const di = require('core/di');
 const config = require('./config');
+const rootConfig = require('../../config');
 const moduleName = require('./module-name');
 const dispatcher = require('./dispatcher');
 const extendDi = require('core/extendModuleDi');
 const alias = require('core/scope-alias');
 const sysMenuCheck = require('lib/util/sysMenuCheck');
+const strings = require('core/strings');
 const isProduction = process.env.NODE_ENV === 'production';
 
 const lastVisit = require('lib/last-visit');
+
+errorSetup(path.join(__dirname, 'strings'));
 
 router.get('/api/filter', dispatcher.api.filter);
 router.get('/api/regions', dispatcher.api.regions);
@@ -42,10 +48,13 @@ router.get('/api/:class/:attr', dispatcher.api.fetch);
 router.get('/:layer/objects/:index', dispatcher.fetch);
 router.get('/:namespace/:layer/objects/:index', dispatcher.fetch);
 
-var app = module.exports = express();
+var app = express();
+module.exports = app;
 
 app.locals.sysTitle = config.sysTitle;
 app.locals.staticsSuffix = process.env.ION_ENV === 'production' ? '.min' : '';
+app.locals.s = strings.s;
+app.locals.__ = (str, params) => strings.s(moduleName, str, params);
 
 app.use('/' + moduleName, express.static(path.join(__dirname, 'view/static')));
 
@@ -54,26 +63,36 @@ app.set('views', []);
 app.set('view engine', 'ejs');
 
 app._init = function () {
-  return di(
-      moduleName,
-      extendDi(moduleName, config.di),
-      {
-        module: app
-      },
-      'app',
-      [],
-      'modules/' + moduleName)
-    .then((scope) => alias(scope, scope.settings.get(moduleName + '.di-alias')))
+  return load(path.join(__dirname, 'i18n'))
     .then(
-    function (scope) {
+      () => di(
+        moduleName,
+        extendDi(moduleName, config.di),
+        {
+          module: app
+        },
+        'app',
+        [],
+        'modules/' + moduleName
+      )
+    )
+    .then(scope => alias(scope, scope.settings.get(moduleName + '.di-alias')))
+    .then((scope) => {
       try {
-        let staticOptions = isProduction ? scope.settings.get(`staticOptions`) : undefined;
+        const staticOptions = isProduction ? scope.settings.get('staticOptions') : undefined;
+        // i18n
+        const lang = config.lang || rootConfig.lang || 'ru';
+        const i18nDir = path.join(__dirname, 'i18n');
+
+        let themePath = scope.settings.get(moduleName + '.theme') || config.theme || 'default';
+        themePath = theme.resolve(__dirname, themePath);
+        const themeI18n = path.join(themePath, 'i18n');
+        //
         theme(
           app,
           moduleName,
           __dirname,
-          scope.settings.get(moduleName + '.theme') ||
-          config.theme || 'default',
+          themePath,
           scope.sysLog,
           staticOptions
         );

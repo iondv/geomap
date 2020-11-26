@@ -4,6 +4,8 @@
 const moduleName = require('../../module-name');
 const di = require('core/di');
 const moment = require('moment');
+const __ = require('core/strings').unprefix('errors');
+const Errors = require('../../errors/web-errors');
 
 /* jshint maxstatements: 50, maxcomplexity: 30 */
 module.exports = function (req, res) {
@@ -13,10 +15,10 @@ module.exports = function (req, res) {
     res.render(template, Object.assign({
       baseUrl: req.app.locals.baseUrl,
       moment
-    }, data), (err, result)=> {
+    }, data), (err, result) => {
       if (err) {
         scope.sysLog.error(err);
-        return res.status(500).send('Ошибка рендера шаблона');
+        return res.status(500).send(__(Errors.RENDER_FAIL, {template}));
       }
       return result ? res.send(result) : res.sendStatus(404);
     });
@@ -34,16 +36,16 @@ module.exports = function (req, res) {
           promises.push(scope.geoData.getLayerItem(query, id));
         }
       }
-      Promise.all(promises).then(items => {
+      Promise.all(promises).then((items) => {
         if (items) {
           //renderTemplate({items, req});
             res.json(items.length);
         } else {
-          res.status(404).send('Объект не найден');
+          res.status(404).send(__(Errors.LAYERS_404));
         }
-      }).catch(err => {
+      }).catch((err) => {
         scope.sysLog.error(err);
-        res.status(500).send('Ошибка получения объектов');
+        res.status(500).send(__(Errors.NO_LAYERS));
       });
     } else {
       renderTemplate({req});
