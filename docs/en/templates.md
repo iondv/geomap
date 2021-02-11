@@ -83,7 +83,7 @@ if (itemSvyaz) {
 
 In Yandex cards format, the code is formed in one line:
 ```xml
-"balloonContentLayoutClass" : "<ul class='balloon-attrlist' style='width:225px'><li><b class='block mb10'>{{ properties.item.name }}{% if properties.item.className %}, {{ properties.item.className.__string }} {% endif %}</b></li><li>Population {{ properties.item.chislennost.chislennost }} ppl.</li><li>Fixed communication: {% if properties.item.statsionar.length %} <ul class='comma-list'>{% for item in properties.item.statsionar %} <li>{{ item.operator.name }}</li>{% endfor %}</ul> {% else %} no {% endif %}</li><li>mobile communication: {% if properties.item.mobile.length %} <ul class='comma-list'>{% for item in properties.item.mobile %} <li>{{ item.__string }}</li>{% endfor %}</ul> {% else %} нет {% endif %}</li><li>Internet: {% if properties.item.internet.length %} yes {% else %} no {% endif %}</li><li>Television:  {% if properties.item.tv.length %} yes {% else %} no {% endif %}</li><li>Radio: {% if properties.item.radio.length %} yes {% else %} no {% endif %}</li><li>Post Office: {% if properties.item.ops.length %} yes {% else %} no {% endif %}</li></ul><div><button type='button' class='btn btn-sm btn-primary map-modal-link' data-type='url' data-url='/registry/namespaceApp@naselenniePunkty/view/naselenniyPunkt@namespaceApp/{{ properties.itemId }}?readonly=on&short=on'>Read more</button></div>"
+"balloonContentLayoutClass" : "<ul class='balloon-attrlist' style='width:225px'><li><b class='block mb10'>{{ properties.item.name }}{% if properties.item.className %}, {{ properties.item.className.__string }} {% endif %}</b></li><li>Population {{ properties.item.chislennost.chislennost }} ppl.</li><li>Fixed communication: {% if properties.item.statsionar.length %} <ul class='comma-list'>{% for item in properties.item.statsionar %} <li>{{ item.operator.name }}</li>{% endfor %}</ul> {% else %} no {% endif %}</li><li>mobile communication: {% if properties.item.mobile.length %} <ul class='comma-list'>{% for item in properties.item.mobile %} <li>{{ item.__string }}</li>{% endfor %}</ul> {% else %} not {% endif %}</li><li>Internet: {% if properties.item.internet.length %} yes {% else %} no {% endif %}</li><li>Television:  {% if properties.item.tv.length %} yes {% else %} no {% endif %}</li><li>Radio: {% if properties.item.radio.length %} yes {% else %} no {% endif %}</li><li>Post Office: {% if properties.item.ops.length %} yes {% else %} no {% endif %}</li></ul><div><button type='button' class='btn btn-sm btn-primary map-modal-link' data-type='url' data-url='/registry/namespaceApp@naselenniePunkty/view/naselenniyPunkt@namespaceApp/{{ properties.itemId }}?readonly=on&short=on'>Read more</button></div>"
 ```
 
 ### Setting to hide a pop-up window when clicking on a link
@@ -97,7 +97,7 @@ In the pop-up window, you can display the sidebar with detailed information abou
 data-close-balloon="true"
 data-type='url'
 data-url='geomap/render/ns/name/0'>
-Информация о ...
+Information about ...
 </button>
 ...
 ```

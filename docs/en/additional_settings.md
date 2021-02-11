@@ -126,7 +126,7 @@ Filters are located on a floating toolbar, the parameters of which are set as fo
 }        
 ```
 
-If you want to **fold toolbars**, addк `"collapsible"` to the *css-classes*. Initially the tollbar is folded to expand it add a `"open"` class.
+If you want to **fold toolbars**, add `"collapsible"` to the *css-classes*. Initially the tollbar is folded to expand it add a `"open"` class.
 
 ```javascript
 ...
