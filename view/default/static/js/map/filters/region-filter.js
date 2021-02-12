@@ -19,9 +19,9 @@
         osmIds: [],
         activeOsmId: null,
         button: {
-          caption: __('Районы'),
-          hint: __('Фильтр по районам'),
-          resetHint: __('Сбросить фильтр'),
+          caption: __('Districts'),
+          hint: __('Filter by districts'),
+          resetHint: __('Reset filter'),
           maxWidth: 100
         },
         levels: {
