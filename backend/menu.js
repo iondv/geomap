@@ -4,9 +4,9 @@
 'use strict';
 
 const GLOBAL_NS = '__global';
-const crossNav = require('lib/util/crossNav');
+const crossNav = require('@iondv/web-rte/util/crossNav');
 const access = require('../lib/access');
-const Permissions = require('core/Permissions');
+const { Permissions } = require('@iondv/acl-contracts');
 
 /* jshint maxcomplexity: 25, maxstatements: 50, maxdepth: 11 */
 /**

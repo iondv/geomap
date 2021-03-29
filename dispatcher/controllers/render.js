@@ -1,10 +1,9 @@
 // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 'use strict';
 
-const moduleName = require('../../module-name');
-const di = require('core/di');
+const { di, utils: { strings } } = require('@iondv/core');
 const moment = require('moment');
-const __ = require('core/strings').unprefix('errors');
+const __ = strings.unprefix('errors');
 const Errors = require('../../errors/web-errors');
 
 /* jshint maxstatements: 50, maxcomplexity: 30 */
@@ -12,7 +11,7 @@ module.exports = function (req, res) {
   /**
    * @type {{aclProvider: AclProvider, geoData: GeoDataRepository}}
    */
-  const scope = di.context(moduleName);
+  const scope = di.context(req.moduleName);
   let user = scope.auth.getUser(req);
   let baseTemplate = req.query.template;
   let notFoundTemplate = req.query.notFound;

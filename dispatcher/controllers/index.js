@@ -4,10 +4,9 @@
 'use strict';
 
 const buildMenu = require('../../backend/menu').buildMenu;
-const moduleName = require('../../module-name');
 const Errors = require('../../errors/web-errors');
-const IonError = require('core/IonError');
-const di = require('core/di');
+const { IonError } = require('@iondv/core');
+const { di } = require('@iondv/core');
 
 function defaultNode(nav) {
   var result = '';
@@ -26,7 +25,7 @@ module.exports = function (req, res) {
   /**
    * @type {{metaRepo: MetaRepository}}
    */
-  var scope = di.context(moduleName);
+  var scope = di.context(req.moduleName);
 
   /**
    * @type {GeoMetaRepository}
@@ -34,30 +33,30 @@ module.exports = function (req, res) {
   var repo = scope.geoMeta;
 
   if (repo) {
-    buildMenu(moduleName, scope, scope.auth.getUser(req).id())
+    buildMenu(req.moduleName, scope, scope.auth.getUser(req).id())
       .then(function (menu) {
         res.render('view/index', {
           baseUrl: req.app.locals.baseUrl,
-          module: moduleName,
+          module: req.moduleName,
           title: 'Geo module',
           pageCode: 'index',
           map: {
-            start: scope.settings.get(moduleName + '.start'),
-            zoom: scope.settings.get(moduleName + '.zoom'),
-            regions: scope.settings.get(moduleName + '.regions'),
-            search: scope.settings.get(moduleName + '.search'),
-            stroke: scope.settings.get(moduleName + '.stroke'),
-            formFilter: scope.settings.get(moduleName + '.formFilter'),
-            panels: scope.settings.get(moduleName + '.panels'),
-            legend: scope.settings.get(moduleName + '.legend'),
-            ymapControls: scope.settings.get(moduleName + '.ymapControls')
+            start: scope.settings.get(req.moduleName + '.start'),
+            zoom: scope.settings.get(req.moduleName + '.zoom'),
+            regions: scope.settings.get(req.moduleName + '.regions'),
+            search: scope.settings.get(req.moduleName + '.search'),
+            stroke: scope.settings.get(req.moduleName + '.stroke'),
+            formFilter: scope.settings.get(req.moduleName + '.formFilter'),
+            panels: scope.settings.get(req.moduleName + '.panels'),
+            legend: scope.settings.get(req.moduleName + '.legend'),
+            ymapControls: scope.settings.get(req.moduleName + '.ymapControls')
           },
-          defaultNode: defaultNode(scope.settings.get(moduleName + '.defaultNav')),
+          defaultNode: defaultNode(scope.settings.get(req.moduleName + '.defaultNav')),
           leftMenu: menu,
           user: scope.auth.getUser(req),
-          logo: scope.settings.get(moduleName + '.logo'),
-          hidePageHead: scope.settings.get(moduleName + '.hidePageHead'),
-          hidePageSidebar: scope.settings.get(moduleName + '.hidePageSidebar')
+          logo: scope.settings.get(req.moduleName + '.logo'),
+          hidePageHead: scope.settings.get(req.moduleName + '.hidePageHead'),
+          hidePageSidebar: scope.settings.get(req.moduleName + '.hidePageSidebar')
         });
       })
       .catch(function (err) {

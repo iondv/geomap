@@ -4,10 +4,9 @@
  */
 'use strict';
 
-const moduleName = require('../../module-name');
-const di = require('core/di');
+const { di } = require('@iondv/core');
 const cuid = require('cuid');
-const normalize = require('core/util/normalize');
+const { util: { normalize } } = require('@iondv/meta-model-contracts');
 const moment = require('moment');
 const locale = require('locale');
 
@@ -120,7 +119,7 @@ module.exports = function (req, res) {
   /**
    * @type {{geoMeta: GeoMetaRepository, securedGeoData: SecuredGeoDataRepository, aclProvider: AclProvider}}
    */
-  let scope = di.context(moduleName);
+  let scope = di.context(req.moduleName);
   let user = scope.auth.getUser(req);
   let layer = scope.geoMeta.getLayer(req.params.layer, req.params.namespace);
   if (!layer) {

@@ -1,12 +1,10 @@
 'use strict';
 
-const async = require('async');
-const moduleName = require('../../../module-name');
 const locale = require('locale');
-const di = require('core/di');
+const { di } = require('@iondv/core');
 
 module.exports = function (req, res) {
-  let scope = di.context(moduleName);
+  let scope = di.context(req.moduleName);
   let locales = new locale.Locales(req.headers['accept-language']);
   try {
     scope.dataRepo.getItem(req.params.class, req.params.id).then(item => {

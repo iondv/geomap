@@ -1,7 +1,6 @@
 'use strict';
 
-var moduleName = require('../../../module-name');
-var di = require('core/di');
+const { di } = require('@iondv/core');
 var clone = require('clone');
 var DataDescription = require('../../../lib/DataDescription');
 
@@ -14,7 +13,7 @@ function mergeProperties(result, cm) {
 }
 
 module.exports = function (req, res) {
-  var scope = di.context(moduleName);
+  var scope = di.context(req.moduleName);
   scope.geoData.getLayerData({}, new DataDescription({
     locationAttribute: req.params.attr,
     query: {

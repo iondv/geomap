@@ -1,12 +1,11 @@
 'use strict';
 
-const moduleName = require('../../../module-name');
 const async = require('async');
-const di = require('core/di');
+const { di } = require('@iondv/core');
 const GLOBAL_NS = '__global';
 
 module.exports = function (req, res) {
-  let scope = di.context(moduleName);
+  let scope = di.context(req.moduleName);
   try {
     let ns = req.query.ns ? req.query.ns : GLOBAL_NS;
     let node = scope.geoMeta.getNavigationNode(req.query.code, ns);

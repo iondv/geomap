@@ -3,7 +3,7 @@
   "sysTitle": "[[sys.title]]",
   "di": {
     "geoMeta": {
-      "module": "./lib/impl/DsGeoMetaRepository",
+      "module": "@iondv/geomap/lib/impl/DsGeoMetaRepository",
       "initMethod": "init",
       "initLevel": 1,
       "options": {
@@ -11,7 +11,7 @@
       }
     },
     "geoData": {
-      "module": "./lib/impl/GeoDataRepository",
+      "module": "@iondv/geomap/lib/impl/GeoDataRepository",
       "initMethod": "init",
       "options": {
         "dataRepo": "ion://cachedDataRepo",
@@ -20,7 +20,7 @@
       }
     },
     "securedGeoData": {
-      "module": "./lib/impl/SecuredGeoDataRepository",
+      "module": "@iondv/geomap/lib/impl/SecuredGeoDataRepository",
       "options": {
         "data": "ion://geoData",
         "acl": "ion://aclProvider"

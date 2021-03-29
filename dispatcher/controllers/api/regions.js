@@ -1,7 +1,6 @@
 'use strict';
 
-const moduleName = require('../../../module-name');
-const di = require('core/di');
+const { di } = require('@iondv/core');
 const path = require('path');
 const fs = require('fs');
 
@@ -14,7 +13,7 @@ for (let i = 0; i < files.length; i++) {
 }
 
 module.exports = function (req, res) {
-  let scope = di.context(moduleName);
+  let scope = di.context(req.moduleName);
   try {
     if (req.query.id) {
       let result = [];

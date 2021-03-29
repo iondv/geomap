@@ -1,11 +1,10 @@
 'use strict';
 
-const moduleName = require('../../../module-name');
 const async = require('async');
 const locale = require('locale');
-const di = require('core/di');
+const { di } = require('@iondv/core');
 const searchFilter = require('core/interfaces/DataRepository/lib/util').textSearchFilter;
-const PropertyTypes = require('core/PropertyTypes');
+const { PropertyTypes } = require('@iondv/meta-model-contracts');
 
 const GLOBAL_NS = '__global';
 
@@ -15,7 +14,7 @@ module.exports = function (req, res) {
   /**
    * @type {{aclProvider: AclProvider}}
    */
-  let scope = di.context(moduleName);
+  let scope = di.context(req.moduleName);
   let user = scope.auth.getUser(req);
   let locales = new locale.Locales(req.headers['accept-language']);
   let codes = req.query.codes || [];

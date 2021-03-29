@@ -4,16 +4,15 @@
 // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 'use strict';
 
-const moduleName = require('../../module-name');
-const di = require('core/di');
-const Permissions = require('core/Permissions');
+const { di } = require('@iondv/core');
+const { Permissions } = require('@iondv/acl-contracts');
 
 /* jshint maxstatements: 50, maxcomplexity: 30 */
 module.exports = function (req, res) {
   /**
    * @type {{geoMeta: GeoMetaRepository, securedGeoData: SecuredGeoDataRepository, aclProvider: AclProvider}}
    */
-  var scope = di.context(moduleName);
+  var scope = di.context(req.moduleName);
 
   var n = scope.geoMeta.getNavigationNode(req.params.node, req.params.namespace);
   if (!n) {

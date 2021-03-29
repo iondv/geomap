@@ -132,7 +132,7 @@
         },
         "di": {
           "dataRepo": {
-            "module": "core/impl/datarepository/ionDataRepository",
+            "module": "@iondv/commons/lib/datarepository/ionDataRepository",
             "options": {
               "dataSource": "ion://Db",
               "metaRepository": "ion://metaRepo",
@@ -141,7 +141,7 @@
               "log": "ion://sysLog",
               "keyProvider": {
                 "name": "keyProvider",
-                "module": "core/impl/meta/keyProvider",
+                "module": "@iondv/commons/lib/meta/keyProvider",
                 "options": {
                   "metaRepo": "ion://metaRepo"
                 }
