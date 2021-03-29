@@ -6,28 +6,26 @@
 
 const path = require('path');
 const express = require('express');
-const staticRouter = require('lib/util/staticRouter');
-const extViews = require('lib/util/extViews');
-const theme = require('lib/util/theme');
+const {
+  util: {
+    staticRouter, extViews, theme
+  }
+} = require('@iondv/web');
 const router = express.Router();
 const ejsLocals = require('ejs-locals');
 
 const {load} = require('@iondv/i18n');
-const errorSetup = require('core/error-setup');
-const { di } = require('@iondv/core');
+const { di, utils: { strings } } = require('@iondv/core');
 const config = require('./config');
 const rootConfig = require('../../config');
 const moduleName = require('./module-name');
 const dispatcher = require('./dispatcher');
 const { utils: { extendDi } } = require('@iondv/commons');
 const alias = di.alias;
-const sysMenuCheck = require('lib/util/sysMenuCheck');
-const strings = require('core/strings');
+const sysMenuCheck = require('@iondv/web-rte/util/sysMenuCheck');
 const isProduction = process.env.NODE_ENV === 'production';
 
 const lastVisit = require('lib/last-visit');
-
-errorSetup(path.join(__dirname, 'strings'));
 
 router.get('/api/filter', dispatcher.api.filter);
 router.get('/api/regions', dispatcher.api.regions);
@@ -53,17 +51,15 @@ module.exports = app;
 
 app.locals.sysTitle = config.sysTitle;
 app.locals.staticsSuffix = process.env.ION_ENV === 'production' ? '.min' : '';
-app.locals.s = strings.s;
-app.locals.__ = (str, params) => strings.s(moduleName, str, params);
-
-app.use('/' + moduleName, express.static(path.join(__dirname, 'view/static')));
+// app.locals.s = strings.s;
+// app.locals.__ = (str, params) => strings.s(moduleName, str, params);
 
 app.engine('ejs', ejsLocals);
 app.set('views', []);
 app.set('view engine', 'ejs');
 
-app._init = function () {
-  return load(path.join(__dirname, 'i18n'))
+app._init = function (moduleName) {
+  return load(path.join(process.cwd(), 'i18n'))
     .then(
       () => di(
         moduleName,
@@ -71,18 +67,13 @@ app._init = function () {
         {
           module: app
         },
-        'app',
-        [],
-        'modules/' + moduleName
+        'app'
       )
     )
     .then(scope => alias(scope, scope.settings.get(moduleName + '.di-alias')))
     .then((scope) => {
       try {
         const staticOptions = isProduction ? scope.settings.get('staticOptions') : undefined;
-        // i18n
-        const lang = config.lang || rootConfig.lang || 'ru';
-        const i18nDir = path.join(__dirname, 'i18n');
 
         let themePath = scope.settings.get(moduleName + '.theme') || config.theme || 'default';
         themePath = theme.resolve(__dirname, themePath);
@@ -90,7 +81,7 @@ app._init = function () {
         //
         theme(
           app,
-          moduleName,
+          null,
           __dirname,
           themePath,
           scope.sysLog,
@@ -99,15 +90,15 @@ app._init = function () {
         extViews(app, scope.settings.get(moduleName + '.templates'));
         var statics = staticRouter(scope.settings.get(moduleName + '.statics'), staticOptions);
         if (statics) {
-          app.use('/' + moduleName, statics);
+          app.use('/', statics);
         }
         app.locals.pageTitle = scope.settings.get(moduleName + '.pageTitle')
           || scope.settings.get('pageTitle')
           || `ION ${config.sysTitle}`;
         app.locals.pageEndContent = scope.settings.get(moduleName +'.pageEndContent') || scope.settings.get('pageEndContent') || '';
-        scope.auth.bindAuth(app, moduleName, {auth: false});
-        app.get('/' + moduleName, lastVisit.saver, sysMenuCheck(scope, app, moduleName), dispatcher.index);
-        app.use('/' + moduleName, router);
+        scope.auth.bindAuth(app, '', {auth: false});
+        app.get('/', lastVisit.saver, sysMenuCheck(scope, app, moduleName), dispatcher.index);
+        app.use('/', router);
       } catch (err) {
         return Promise.reject(err);
       }
