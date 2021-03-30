@@ -17,15 +17,13 @@ const ejsLocals = require('ejs-locals');
 const {load} = require('@iondv/i18n');
 const { di, utils: { strings } } = require('@iondv/core');
 const config = require('./config');
-const rootConfig = require('../../config');
-const moduleName = require('./module-name');
 const dispatcher = require('./dispatcher');
 const { utils: { extendDi } } = require('@iondv/commons');
 const alias = di.alias;
 const sysMenuCheck = require('@iondv/web-rte/util/sysMenuCheck');
 const isProduction = process.env.NODE_ENV === 'production';
 
-const lastVisit = require('lib/last-visit');
+const { util: { lastVisit } } = require('@iondv/web');
 
 router.get('/api/filter', dispatcher.api.filter);
 router.get('/api/regions', dispatcher.api.regions);

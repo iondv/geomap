@@ -3,7 +3,7 @@
 const async = require('async');
 const locale = require('locale');
 const { di } = require('@iondv/core');
-const searchFilter = require('core/interfaces/DataRepository/lib/util').textSearchFilter;
+const { data: { utils: { searchFilter } } } = require('@iondv/meta-model');
 const { PropertyTypes } = require('@iondv/meta-model-contracts');
 
 const GLOBAL_NS = '__global';
