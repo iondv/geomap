@@ -8,7 +8,7 @@ const path = require('path');
 const express = require('express');
 const {
   util: {
-    staticRouter, extViews, theme
+    staticRouter, extViews, theme, lastVisit
   }
 } = require('@iondv/web');
 const router = express.Router();
@@ -22,8 +22,6 @@ const { utils: { extendDi } } = require('@iondv/commons');
 const alias = di.alias;
 const sysMenuCheck = require('@iondv/web-rte/util/sysMenuCheck');
 const isProduction = process.env.NODE_ENV === 'production';
-
-const { util: { lastVisit } } = require('@iondv/web');
 
 router.get('/api/filter', dispatcher.api.filter);
 router.get('/api/regions', dispatcher.api.regions);
