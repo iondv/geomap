@@ -39,7 +39,7 @@ module.exports = function (req, res) {
         res.render('view/index', {
           baseUrl: req.app.locals.baseUrl,
           module: moduleName,
-          title: 'Geo module',
+          title: 'templates.default.view.index.title',
           pageCode: 'index',
           map: {
             start: scope.settings.get(moduleName + '.start'),
