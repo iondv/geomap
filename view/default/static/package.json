@@ -51,7 +51,7 @@
         "jquery": "2.2.4",
         "jquery-knob": "git+https://github.com/aterrien/jQuery-Knob.git#1.2.13",
         "jquery-ui": "git+https://git.iondv.ru/node-modules/jquery-ui.git",
-        "js-cookie": "2.2.1",
+        "js-cookie": "3.0.7",
         "jspdf-autotable": "3.2.11",
         "icheck": "1.0.2",
         "ionicons": "2.0.1",
